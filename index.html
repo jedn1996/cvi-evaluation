@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,27 +14,45 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .serif-letter { font-family: 'Merriweather', Georgia, serif; }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .serif-letter {
+      font-family: 'Merriweather', Georgia, serif;
+    }
+    /* Hide scrollbars smoothly while preserving scroll functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white relative">
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
 
   <!-- Top Navbar -->
   <header class="bg-slate-900 text-white border-b border-slate-800 py-4 px-6 shadow-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-sm">CVI</div>
+        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-sm">
+          CVI
+        </div>
         <div>
           <h1 class="text-base md:text-lg font-bold tracking-tight text-white leading-tight">Content Validity Index (CVI) System</h1>
-          <p class="text-slate-400 text-xs">Semi-Structured Interview Expert Review &bull; UANL</p>
+          <p class="text-slate-400 text-xs">Semi-Structured Interview Expert Review &bull; UANL Doctoral Research</p>
         </div>
       </div>
-      <div class="flex items-center space-x-2">
-        <span id="system-status-badge" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
-          Status: Started
-        </span>
+      <div class="flex items-center space-x-3">
+        <!-- Dynamic Lifecycle Status Badge -->
+        <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+          <span>Status:</span>
+          <span id="badge-status-container" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 transition-all duration-300">
+            <span id="badge-status-dot" class="w-1.5 h-1.5 rounded-full bg-blue-400 mr-1.5 animate-pulse"></span>
+            <span id="badge-status-text">Started</span>
+          </span>
+        </div>
       </div>
     </div>
   </header>
@@ -42,9 +60,9 @@
   <main class="max-w-6xl mx-auto w-full px-4 py-8 flex-grow">
     
     <!-- Multi-Step Progress Tracker -->
-    <div class="mb-8 max-w-4xl mx-auto" id="progress-container">
+    <div class="mb-8 max-w-4xl mx-auto">
       <div class="flex justify-between items-center text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
-        <span id="progress-step-text">Step 1 of 4: Welcome & Data Form</span>
+        <span id="progress-step-text">Step 1 of 4: Welcome & Reviewer Registration</span>
         <span id="progress-percentage-text" class="text-blue-600 font-bold">25%</span>
       </div>
       <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
@@ -52,81 +70,230 @@
       </div>
     </div>
 
+    <!-- ========================================================================= -->
     <!-- STEP 1: WELCOME & EXPERT DATA FORM -->
+    <!-- ========================================================================= -->
     <section id="slide-step-1" class="transition-all duration-300">
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden max-w-4xl mx-auto">
+        
+        <!-- Welcome Card Header -->
         <div class="bg-gradient-to-r from-blue-900 via-slate-900 to-slate-950 p-6 md:p-8 text-white">
-          <span class="bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs px-3 py-1 rounded-full font-medium inline-block mb-3">Doctoral Research Instrument</span>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">Welcome to the Content Validity Index (CVI) Evaluation System</h2>
+          <span class="bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs px-3 py-1 rounded-full font-medium inline-block mb-3">
+            Doctoral Research Instrument Validation
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">
+            Welcome to the Content Validity Index (CVI) Evaluation System
+          </h2>
           <p class="text-slate-300 text-sm md:text-base leading-relaxed">
             Dear Expert Reviewer, thank you for contributing your valuable expertise to validate the interview script items for the doctoral study: 
             <span class="text-blue-200 italic font-semibold">“Micro-credentials to enhance pedagogical competence for pre-service English teachers of a public university in northern Mexico”</span>.
           </p>
         </div>
+
+        <!-- Instructions Briefing Box -->
+        <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50/70">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4 flex items-center gap-2">
+            <span>📋</span> Quick Instructions
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="font-bold text-slate-800 block mb-1">1. Evaluation Scale (1–4)</span>
+              <p class="text-slate-600 leading-normal">Rate all 9 questions across Relevance, Clarity, and Sufficiency from 1 (inadequate) to 4 (fully adequate).</p>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="font-bold text-slate-800 block mb-1">2. Qualitative Feedback</span>
+              <p class="text-slate-600 leading-normal">If you assign 1 or 2 to any criterion, please provide constructive recommendations. Otherwise, leave N/A.</p>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="font-bold text-slate-800 block mb-1">3. Direct Submission</span>
+              <p class="text-slate-600 leading-normal">Once completed, click Final Submission. Your responses will sync securely with our central database.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Form -->
         <div class="p-6 md:p-8">
+          <div class="mb-6">
+            <div class="inline-block bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-md mb-1 uppercase tracking-wide">
+              CONTENT VALIDITY INDEX (CVI) SYSTEM FOR SEMI-STRUCTURED INTERVIEW
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">EXPERT DATA FORM</h3>
+            <p class="text-slate-500 text-xs mt-1">Please confirm your academic identification details below to begin the assessment.</p>
+          </div>
+
           <form id="demographic-form" class="space-y-5">
             <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Full Name *</label>
-              <input type="text" id="full-name" required placeholder="e.g., Dr. Jane Doe" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none text-sm transition">
+              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="full-name">
+                Full Name <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="full-name" required placeholder="e.g., Dr. Jane Doe"
+                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition">
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Education Level / Academic Degree *</label>
-                <input type="text" id="education-level" required placeholder="Ph.D. / Ed.D. / Master's" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none text-sm transition">
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="education-level">
+                  Education Level / Academic Degree <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="education-level" required placeholder="Ph.D. / Ed.D. / Master's / + Name of the program"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition">
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Institutional Affiliation *</label>
-                <input type="text" id="institutional-affiliation" required placeholder="e.g., UANL" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none text-sm transition">
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="institutional-affiliation">
+                  Institutional Affiliation <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="institutional-affiliation" required placeholder="e.g., Universidad Autónoma de Nuevo León"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition">
               </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">ORCID / Researcher ID *</label>
-                <input type="text" id="orcid-id" required placeholder="e.g., 0000-0002-1825-0097" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none text-sm transition">
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="orcid-id">
+                  ORCID / Researcher ID <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="orcid-id" required placeholder="e.g., 0000-0002-1825-0097"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition">
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Email Address *</label>
-                <input type="email" id="reviewer-email" required placeholder="email@university.edu" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none text-sm transition">
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="reviewer-email">
+                  Email Address <span class="text-red-500">*</span>
+                </label>
+                <input type="email" id="reviewer-email" required placeholder="e.g., jane.doe@uanl.edu.mx"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition">
               </div>
             </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="short-biodata">
+                Short Biodata / Professional Profile
+              </label>
+              <textarea id="short-biodata" rows="2" placeholder="Brief summary of your academic background, research areas, and teaching experience..."
+                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-sm transition"></textarea>
+            </div>
+
             <div class="pt-4 flex justify-end">
-              <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition flex items-center space-x-2">
-                <span>Continue</span><span>&rarr;</span>
+              <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center space-x-2">
+                <span>Continue</span>
+                <span>&rarr;</span>
               </button>
             </div>
           </form>
         </div>
+
       </div>
     </section>
 
+    <!-- ========================================================================= -->
     <!-- STEP 2: FORMAL INVITATION LETTER -->
+    <!-- ========================================================================= -->
     <section id="slide-step-2" class="hidden transition-all duration-300">
       <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Controls Bar -->
         <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
-          <button type="button" id="btn-back-to-step1" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-100 transition">&larr; Edit Details</button>
+          <button type="button" id="btn-back-to-step1" class="text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
+            <span>&larr;</span> <span>Edit Data Details</span>
+          </button>
+          
           <div class="flex items-center gap-2">
-            <button type="button" id="btn-download-pdf" class="text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-xl transition">Download PDF</button>
+            <button type="button" id="btn-download-pdf" class="inline-flex items-center gap-1.5 text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-xs transition">
+              <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>Download Letter (PDF)</span>
+            </button>
           </div>
         </div>
 
+        <!-- Formal Letter Canvas (Target for PDF Generation - Keep Spanish for Institutional Accuracy) -->
         <div id="letter-pdf-container" class="bg-white p-8 md:p-14 rounded-2xl shadow-sm border border-slate-200 serif-letter text-slate-800 leading-relaxed text-sm md:text-base">
+          <!-- Institutional Header -->
           <div class="border-b-2 border-slate-800 pb-5 mb-8">
             <div class="text-xs uppercase font-sans tracking-widest text-slate-500 font-bold">Universidad Autónoma de Nuevo León</div>
             <div class="text-xs uppercase font-sans text-slate-500">Facultad de Filosofía y Letras &bull; División de Estudios de Posgrado</div>
             <h2 class="text-lg md:text-xl font-bold font-sans text-slate-900 mt-2">Carta de Invitación y Validación por Juicio de Expertos</h2>
           </div>
+
+          <!-- Addressee Details (Dynamically Populated) -->
           <div class="mb-6 font-sans">
             <div id="letter-recipient-name" class="font-bold text-slate-900 text-base">Dr. Evaluador</div>
-            <div id="letter-recipient-affiliation" class="text-slate-600 text-sm">Institución</div>
-            <div id="letter-recipient-degree" class="text-slate-600 text-sm">Nivel</div>
+            <div id="letter-recipient-affiliation" class="text-slate-600 text-sm">Institución Académica</div>
+            <div id="letter-recipient-degree" class="text-slate-600 text-sm">Nivel de Estudios / Posgrado</div>
             <div class="text-slate-900 font-semibold text-sm mt-1">Presente. –</div>
           </div>
-          <p class="text-justify mb-4">Por este medio, solicito de la manera más atenta la revisión y validación de algunos ítems para complementar el guion de una entrevista semiestructurada para mi investigación doctoral titulada <strong>“Micro-credentials to enhance pedagogical competence for pre-service English teachers of a public university in northern Mexico”</strong>.</p>
-          <p class="text-justify mb-4">Para asegurar que los <em>items</em> sean metodológicamente sólidos, le solicito amablemente evaluar en una escala del 1 al 4 las dimensiones de relevancia, claridad y suficiencia para cada ítem.</p>
+
+          <p class="mb-4">
+            Estimada/o <span id="letter-salutation-name" class="font-bold">Colega</span>,
+          </p>
+
+          <p class="text-justify mb-4">
+            Por este medio, le saludo cordialmente y, a la vez, en atención a su distinguida trayectoria académica, solicito de la manera más atenta la revisión y validación de algunos ítems para complementar el guion de una entrevista semiestructurada, el cual constituye un segundo instrumento para mi investigación doctoral titulada <strong>“Micro-credentials to enhance pedagogical competence for pre-service English teachers of a public university in northern Mexico”</strong>.
+          </p>
+
+          <p class="text-justify mb-4">
+            Mi nombre es Jesús Eduardo Doria Navarro, estudiante que se encuentra bajo la dirección de tesis de los doctores Andrés Sepúlveda Rodríguez y Rubén Suárez Escalona, del programa de Doctorado en Filosofía con Acentuación en Estudios de la Educación del posgrado de la Facultad de Filosofía y Letras de la UANL. El propósito de este estudio es profundizar en las percepciones que tienen los estudiantes-profesores del programa de Lingüística Aplicada a la Enseñanza y Traducción del Inglés (LAEyTI) con relación en la adquisición de tres competencias relevantes (pedagógica, lingüística e intercultural), haciendo énfasis en la concreción de la competencia pedagógica.
+          </p>
+
+          <p class="text-justify mb-5">
+            Para asegurar que los <em>items</em> sean metodológicamente sólidos, pertinentes para el tema de investigación y estén expresados de manera adecuada, le solicito amablemente evaluar en una escala del 1 al 4 las dimensiones de relevancia, claridad y suficiencia para cada ítem. Los criterios de asignación de puntaje se presentan en la siguiente tabla:
+          </p>
+
+          <!-- Rubric Table in Letter -->
+          <div class="my-6 overflow-hidden rounded-xl border border-slate-300 font-sans text-xs">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-900 text-white font-semibold">
+                  <th class="py-2.5 px-3 border-r border-slate-700 text-center w-20">Puntaje</th>
+                  <th class="py-2.5 px-3 border-r border-slate-700">Relevancia</th>
+                  <th class="py-2.5 px-3 border-r border-slate-700">Claridad</th>
+                  <th class="py-2.5 px-3">Suficiencia</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-2 px-3 font-bold text-center bg-slate-50">1</td>
+                  <td class="py-2 px-3">No relevante</td>
+                  <td class="py-2 px-3">No claro</td>
+                  <td class="py-2 px-3">Insuficiente</td>
+                </tr>
+                <tr class="bg-slate-50/50">
+                  <td class="py-2 px-3 font-bold text-center bg-slate-50">2</td>
+                  <td class="py-2 px-3">Requiere revisión mayor</td>
+                  <td class="py-2 px-3">Requiere revisión mayor</td>
+                  <td class="py-2 px-3">Requiere revisión mayor</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3 font-bold text-center bg-slate-50">3</td>
+                  <td class="py-2 px-3">Relevante (revisión menor)</td>
+                  <td class="py-2 px-3">Claro (revisión menor)</td>
+                  <td class="py-2 px-3">Suficiente (revisión menor)</td>
+                </tr>
+                <tr class="bg-slate-50/50">
+                  <td class="py-2 px-3 font-bold text-center bg-slate-50">4</td>
+                  <td class="py-2 px-3">Totalmente relevante</td>
+                  <td class="py-2 px-3">Totalmente claro</td>
+                  <td class="py-2 px-3">Totalmente suficiente</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-justify mb-4">
+            En caso de otorgar una puntuación de 1 o 2 en cualquiera de las dimensiones, le agradeceré ingresar sus observaciones o sugerencias cualitativas en el apartado correspondiente para orientar la mejora de dicho ítem. Si no requiere modificaciones o considera que el valor es 3 o 4, puede omitir comentarios o indicar "N/A".
+          </p>
+
+          <p class="text-justify mb-6">
+            La evaluación podrá realizarse de manera dinámica a través de nuestro sistema web de validación accesible que se presentará a continuación.
+          </p>
+
+          <p class="mb-8">
+            Agradezco de antemano su valioso apoyo y contribución académica a este proyecto de investigación.
+          </p>
+
+          <!-- Signature & Signoff -->
           <div class="pt-6 font-sans text-xs md:text-sm">
             <p class="font-bold text-slate-800">Atentamente,</p>
             <p class="italic text-slate-600 mb-6">Alere Flammam Veritatis</p>
-            <div id="letter-current-date" class="text-slate-500 font-semibold mb-1">Fecha</div>
+            <div id="letter-current-date" class="text-slate-500 font-semibold mb-1">C.d. Universitaria; San Nicolás de los Garza, N.L., a 27 de Septiembre de 2026.</div>
             <div class="mt-8 pt-4 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p class="font-bold text-slate-900">Jesús Eduardo Doria Navarro</p>
@@ -140,95 +307,354 @@
           </div>
         </div>
 
-        <div class="flex justify-between pt-2">
-          <button type="button" id="btn-reject-invitation" class="text-xs font-bold text-slate-500 hover:text-rose-600 transition underline">Decline Invitation</button>
-          <button type="button" id="btn-to-step-3" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition flex items-center space-x-2">
-            <span>Accept & Proceed to Instructions</span><span>&rarr;</span>
+        <!-- Action Bar: Decline on the Left, Accept & Continue on the Right -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2">
+          <!-- Reject Button placed on the opposite end -->
+          <button type="button" id="btn-reject-invitation" class="w-full sm:w-auto order-2 sm:order-1 inline-flex items-center justify-center gap-2 text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-6 py-3.5 rounded-xl transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span>Decline Invitation</span>
+          </button>
+
+          <!-- Accept and Continue Button -->
+          <button type="button" id="btn-to-step-3" class="w-full sm:w-auto order-1 sm:order-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center space-x-2">
+            <span>Accept & Proceed to Instructions</span>
+            <span>&rarr;</span>
           </button>
         </div>
+
       </div>
     </section>
 
-    <!-- STEP 3 & 4 (Combined conceptual container for brevity) -->
+    <!-- ========================================================================= -->
+    <!-- STEP 3: GUIDE AND INSTRUCTIONS FOR EXPERT REVIEWERS -->
+    <!-- ========================================================================= -->
     <section id="slide-step-3" class="hidden transition-all duration-300">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 max-w-4xl mx-auto p-6 md:p-8 text-center">
-        <h2 class="text-2xl font-bold text-slate-900 mb-4">GUIDE AND INSTRUCTIONS</h2>
-        <p class="text-slate-600 mb-6">Evaluate each interview question across: Relevance, Clarity, and Sufficiency using the 1-4 scale. Provide qualitative feedback for low scores (1 or 2).</p>
-        <button type="button" id="btn-to-step-4" class="bg-blue-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition">Start Evaluation &rarr;</button>
-      </div>
-    </section>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden max-w-4xl mx-auto p-6 md:p-8">
+        
+        <div class="border-b border-slate-200 pb-5 mb-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">Methodological Rubric</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-2">GUIDE AND INSTRUCTIONS FOR EXPERT REVIEWERS</h2>
+          <p class="text-slate-500 text-sm">Please review the qualitative orientation and item rating guidelines before beginning.</p>
+        </div>
 
-    <section id="slide-step-4" class="hidden transition-all duration-300">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 max-w-6xl mx-auto p-4 md:p-8">
-        <h2 class="text-xl font-bold mb-6">Semi-Structured Interview Evaluation</h2>
-        <div id="evaluation-cards-container" class="space-y-6"></div>
-        <div class="mt-8 pt-6 border-t border-slate-200 flex justify-end">
-          <button type="button" id="btn-submit-evaluation" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-4 rounded-xl shadow-lg transition">
-            Final Submission
+        <!-- 5 Principles List -->
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <p class="text-sm text-slate-700"><strong>Semi-Structured Interview Script:</strong> This instrument is a semi-structured interview script. Questions are designed to trigger broad, deep, and detailed qualitative responses from participants.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <p class="text-sm text-slate-700"><strong>Target of Evaluation:</strong> We are evaluating <strong>the quality, clarity, and suitability of the questions</strong> to be asked to participants, not testing the participants themselves.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <p class="text-sm text-slate-700"><strong>Three Methodological Criteria:</strong> Evaluate each interview question across: <strong>Relevance</strong> (practical utility and alignment), <strong>Clarity</strong> (comprehensibility and syntax), and <strong>Sufficiency</strong> (topical coverage).</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <p class="text-sm text-slate-700"><strong>Quantitative Scale:</strong> Use the numerical options from <strong>1 to 4</strong> available in the drop-down menus.</p>
+          </div>
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <p class="text-sm text-slate-700"><strong>Qualitative Feedback:</strong> In 'Qualitative Comments and Suggestions', provide specific recommendations to refine wording, avoid leading bias, or adjust question tone.</p>
+          </div>
+        </div>
+
+        <!-- Rubric Grid Table -->
+        <div class="mb-8">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 mb-3">ITEM RATING SCALE GUIDE (1 TO 4)</h3>
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left text-xs md:text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-900 text-white font-semibold">
+                  <th class="py-3 px-4 w-20 text-center">Score</th>
+                  <th class="py-3 px-4">Meaning in Question Evaluation</th>
+                  <th class="py-3 px-4">Validity Interpretation</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-3 px-4 text-center font-bold bg-red-50 text-red-700">1</td>
+                  <td class="py-3 px-4 font-medium text-slate-800">Poor: The question is NOT relevant, NOT clear, or insufficient.</td>
+                  <td class="py-3 px-4 text-rose-600 font-semibold">Invalid Item (Requires elimination or major rewrite)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-center font-bold bg-orange-50 text-orange-700">2</td>
+                  <td class="py-3 px-4 font-medium text-slate-800">Fair: The question is barely relevant or needs major revisions.</td>
+                  <td class="py-3 px-4 text-amber-600 font-semibold">Invalid Item (Requires deep revision)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-center font-bold bg-amber-50 text-amber-800">3</td>
+                  <td class="py-3 px-4 font-medium text-slate-800">Good: The question is relevant and clear with minor adjustments.</td>
+                  <td class="py-3 px-4 text-emerald-600 font-semibold">Valid Item (Approved with minor tweaks)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-center font-bold bg-emerald-50 text-emerald-800">4</td>
+                  <td class="py-3 px-4 font-medium text-slate-800">Excellent: The question is highly relevant, clear, and well-worded.</td>
+                  <td class="py-3 px-4 text-emerald-700 font-bold">Valid Item (Fully approved)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+          <button type="button" id="btn-back-to-step2" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-4 py-2 rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span>&larr;</span> <span>Back to Invitation Letter</span>
+          </button>
+          <button type="button" id="btn-to-step-4" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center space-x-2">
+            <span>Start Review</span>
+            <span>&rarr;</span>
           </button>
         </div>
+
       </div>
     </section>
 
-    <!-- STEP 5: FINAL STATE -->
+    <!-- ========================================================================= -->
+    <!-- STEP 4: INTERVIEW SCRIPT ITEMS EVALUATION -->
+    <!-- ========================================================================= -->
+    <section id="slide-step-4" class="hidden transition-all duration-300">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden max-w-6xl mx-auto p-4 md:p-8">
+        
+        <!-- Reviewer Banner -->
+        <div class="bg-slate-900 text-white p-4 md:p-5 rounded-xl flex flex-wrap justify-between items-center gap-3 mb-6">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Reviewer:</span>
+            <span id="banner-reviewer-name" class="font-bold text-white ml-1 text-sm md:text-base">-</span>
+          </div>
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">ORCID / Researcher ID:</span>
+            <span id="banner-reviewer-orcid" class="font-mono text-blue-300 ml-1 text-xs md:text-sm">-</span>
+          </div>
+        </div>
+
+        <div class="mb-6 flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900">Semi-Structured Interview Script Evaluation</h2>
+            <p class="text-xs md:text-sm text-slate-500">Please review all 9 questions and assign Relevance, Clarity, and Sufficiency scores (1–4).</p>
+          </div>
+          <button type="button" id="btn-back-to-step3" class="text-xs font-semibold text-blue-600 hover:text-blue-800 underline">
+            Review Guidelines
+          </button>
+        </div>
+
+        <!-- Evaluation Items Container -->
+        <div id="evaluation-cards-container" class="space-y-6"></div>
+
+        <!-- Final Submission Action Bar -->
+        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="text-xs text-slate-500 text-center md:text-left">
+            <span class="font-semibold text-slate-700">Notice:</span> Qualitative suggestions are strongly encouraged if you score 1 or 2 on any criterion.
+          </div>
+          <button type="button" id="btn-submit-evaluation" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span>Final Submission</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- STEP 5: FINAL CONFIRMATION & THANK YOU -->
+    <!-- ========================================================================= -->
     <section id="slide-step-5" class="hidden transition-all duration-300">
-      <!-- Loading -->
+      
+      <!-- Submitting State -->
       <div id="state-submitting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center max-w-2xl mx-auto">
         <div class="inline-block animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-5"></div>
-        <h3 class="text-xl font-bold text-slate-900">Submitting Data...</h3>
+        <h3 class="text-xl font-bold text-slate-900">Submitting responses to the Central Dashboard...</h3>
+        <p class="text-slate-500 text-sm mt-2">Securely synchronizing your quantitative ratings and qualitative feedback.</p>
       </div>
-      <!-- Success -->
-      <div id="state-success" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center max-w-2xl mx-auto">
-        <h2 class="text-2xl font-bold text-emerald-600 mb-3">Thank You for Your Evaluation!</h2>
-        <p class="text-slate-600">Your responses have been successfully submitted. You can safely close this window.</p>
+
+      <!-- Success State -->
+      <div id="state-success" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-14 text-center max-w-2xl mx-auto">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xs">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Thank You for Your Evaluation!</h2>
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
+          Your responses have been successfully submitted and stored in the central database.
+        </p>
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
+          We truly appreciate your time and expert contribution to the content validation process of our research instrument.
+        </p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Status: Response Received</span>
+        </div>
+        <p class="text-slate-400 text-xs mt-6">You can close this tab safely.</p>
       </div>
-      <!-- Rejected -->
-      <div id="state-rejected" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center max-w-2xl mx-auto">
-        <h2 class="text-2xl font-bold text-slate-600 mb-3">Invitation Declined</h2>
-        <p class="text-slate-600">Thank you for your time. You can safely close this window.</p>
+
+      <!-- Rejected State -->
+      <div id="state-rejected" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-14 text-center max-w-2xl mx-auto">
+        <div class="w-16 h-16 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xs">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">Invitation Declined</h2>
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+          We sincerely appreciate your attention to our research project. Should your availability permit in the future, we remain at your full disposal.
+        </p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 border border-slate-300 text-slate-700 rounded-xl text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+          <span>Status: Declined</span>
+        </div>
+        <p class="text-slate-400 text-xs mt-6">You can close this tab safely.</p>
       </div>
+
     </section>
 
   </main>
 
-  <!-- CUSTOM MODAL BACKDROP -->
-  <div id="custom-modal-backdrop" class="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden transform scale-95 transition-transform duration-300" id="custom-modal-box">
-      <div class="p-6 text-center">
-        <div id="modal-icon-container" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"></div>
-        <h3 id="modal-title" class="text-xl font-bold text-slate-900 mb-2"></h3>
-        <p id="modal-message" class="text-slate-600 text-sm leading-relaxed mb-6"></p>
-        <div id="modal-actions" class="flex flex-col sm:flex-row gap-3 justify-center"></div>
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-6 text-center text-xs text-slate-400">
+    <p>Doctorado en Filosofía con Acentuación en Estudios de la Educación &bull; Facultad de Filosofía y Letras &bull; UANL</p>
+  </footer>
+
+  <!-- Custom Modal Backdrop & Dialog Container -->
+  <div id="custom-modal-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden transition-opacity duration-200">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center border border-slate-100 transform transition-all duration-200">
+      <div id="modal-icon-container" class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-amber-100 text-amber-600">
+        <!-- SVG injected dynamically -->
+      </div>
+      <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Notice</h3>
+      <p id="modal-message" class="text-sm text-slate-600 mb-6 leading-relaxed">Message content...</p>
+      <div id="modal-actions" class="flex justify-center items-center gap-3">
+        <!-- Action buttons injected dynamically -->
       </div>
     </div>
   </div>
 
   <script>
-    // =========================================================================
-    // 🔴 1. REEMPLAZA ESTO CON LA URL DE TU SCRIPT DE GOOGLE
-    // =========================================================================
+    /**
+     * REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+     */
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxVwKkpdtBj8DRVeH9CmtOkmQsZQ1fek4rWykRBcYSzI8Cv41RmLRIVqbsmxVJGy4dw/exec";
 
+    // 9 Items with updated categories, question types, and probe priorities
     const INSTRUMENT_ITEMS = [
-      { id: "Item 1", aspect: "Pedagogical planning", question: "How do you perceive that your bachelor's degree program prepared you to manage pedagogical challenges?", type: "General", priority: "Probe" },
-      { id: "Item 2", aspect: "Pedagogical planning", question: "Could you explain your typical process for planning a unit?", type: "Grand tour", priority: "Probe" },
-      { id: "Item 3", aspect: "Technology integration", question: "Can you provide a specific example of adapting a face-to-face lesson to online?", type: "Example", priority: "Probe" },
-      { id: "Item 4", aspect: "Personalized instruction", question: "What assessment tools do you use for personalized tasks?", type: "Structural", priority: "Probe" },
-      { id: "Item 5", aspect: "Emerging professional roles", question: "How does your approach differ from an instructional designer to a traditional teacher?", type: "Contrast", priority: "Probe" },
-      { id: "Item 6", aspect: "Research & improvement", question: "Could you share an example of a classroom problem you researched?", type: "Example", priority: "Probe" },
-      { id: "Item 7", aspect: "Inclusive education", question: "How does lesson planning differ for students with special needs?", type: "Contrast", priority: "Probe" },
-      { id: "Item 8", aspect: "Language proficiency", question: "How do you perceive your program prepared you for English proficiency?", type: "General", priority: "Probe" },
-      { id: "Item 9", aspect: "Intercultural competence", question: "How do you perceive your program prepared you for intercultural competence?", type: "General", priority: "Probe" }
+      {
+        id: "Item 1",
+        aspect: "Pedagogical planning and instructional design",
+        question: "How do you perceive that your bachelor's degree program prepared you to manage pedagogical challenges in your current professional practice?",
+        type: "General (grand tour)",
+        priority: "Probe"
+      },
+      {
+        id: "Item 2",
+        aspect: "Pedagogical planning and instructional design",
+        question: "Could you explain your typical process for planning a unit, from selecting the methodology to finalizing the lesson plan?",
+        type: "Grand tour",
+        priority: "Probe"
+      },
+      {
+        id: "Item 3",
+        aspect: "Technology integration and emerging instructional modalities",
+        question: "Can you provide a specific example of a time you had to adapt a face-to-face classroom lesson to a fully online format using digital technology?",
+        type: "Example",
+        priority: "Probe"
+      },
+      {
+        id: "Item 4",
+        aspect: "Personalized instruction and assessment",
+        question: "What types of assessment tools do you use to design personalized tasks for professional or academic English learners?",
+        type: "Structural",
+        priority: "Probe"
+      },
+      {
+        id: "Item 5",
+        aspect: "Emerging professional roles",
+        question: "How does your approach differ from being an instructional designer to a traditional classroom teacher?",
+        type: "Contrast",
+        priority: "Probe"
+      },
+      {
+        id: "Item 6",
+        aspect: "Research and improvement of teaching practice",
+        question: "Could you share an example of a classroom problem you identified and systematically researched to improve your teaching?",
+        type: "Example",
+        priority: "Probe"
+      },
+      {
+        id: "Item 7",
+        aspect: "Inclusive education and learner diversity",
+        question: "How does your lesson planning process differ between preparing tasks for a standard group and for students with special educational needs?",
+        type: "Contrast",
+        priority: "Probe"
+      },
+      {
+        id: "Item 8",
+        aspect: "Language proficiency and application",
+        question: "How do you perceive that your bachelor's degree program prepared you to apply your English language proficiency in academic and/or professional contexts?",
+        type: "General (grand tour)",
+        priority: "Probe"
+      },
+      {
+        id: "Item 9",
+        aspect: "Integration of intercultural competence",
+        question: "How do you perceive your bachelor's degree program prepared you for intercultural competence to integrate it into your teaching practice?",
+        type: "General (grand tour)",
+        priority: "Probe"
+      }
     ];
 
-    const reviewerData = { fullName: "", educationLevel: "", affiliation: "", orcid: "", email: "" };
+    // Global Reviewer Profile State
+    const reviewerData = {
+      fullName: "",
+      educationLevel: "",
+      affiliation: "",
+      orcid: "",
+      email: "",
+      biodata: ""
+    };
 
     document.addEventListener("DOMContentLoaded", () => {
       buildItemsTable();
       attachEvents();
+      updateSystemStatusBadge("Started");
     });
 
+    // Updates the top header lifecycle status badge
+    function updateSystemStatusBadge(status) {
+      const container = document.getElementById("badge-status-container");
+      const dot = document.getElementById("badge-status-dot");
+      const text = document.getElementById("badge-status-text");
+
+      text.textContent = status;
+
+      // Reset base classes
+      container.className = "inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border transition-all duration-300";
+      dot.className = "w-1.5 h-1.5 rounded-full mr-1.5";
+
+      switch (status) {
+        case "Started":
+          container.classList.add("bg-blue-500/10", "text-blue-400", "border-blue-500/20");
+          dot.classList.add("bg-blue-400", "animate-pulse");
+          break;
+        case "Accepted":
+          container.classList.add("bg-indigo-500/10", "text-indigo-400", "border-indigo-500/20");
+          dot.classList.add("bg-indigo-400", "animate-pulse");
+          break;
+        case "In Progress":
+          container.classList.add("bg-amber-500/10", "text-amber-400", "border-amber-500/20");
+          dot.classList.add("bg-amber-400", "animate-pulse");
+          break;
+        case "Finished":
+          container.classList.add("bg-emerald-500/10", "text-emerald-400", "border-emerald-500/20");
+          dot.classList.add("bg-emerald-400");
+          break;
+        case "Declined":
+          container.classList.add("bg-rose-500/10", "text-rose-400", "border-rose-500/20");
+          dot.classList.add("bg-rose-400");
+          break;
+      }
+    }
+
     function attachEvents() {
+      // Step 1: Submit Data Form
       document.getElementById("demographic-form").addEventListener("submit", (e) => {
         e.preventDefault();
         reviewerData.fullName = document.getElementById("full-name").value.trim();
@@ -236,118 +662,462 @@
         reviewerData.affiliation = document.getElementById("institutional-affiliation").value.trim();
         reviewerData.orcid = document.getElementById("orcid-id").value.trim();
         reviewerData.email = document.getElementById("reviewer-email").value.trim();
+        reviewerData.biodata = document.getElementById("short-biodata").value.trim();
 
+        // Update Dynamic Letter Content
         document.getElementById("letter-recipient-name").textContent = reviewerData.fullName;
-        const dateOpt = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById("letter-current-date").textContent = `San Nicolás de los Garza, a ${new Date().toLocaleDateString('es-MX', dateOpt)}.`;
+        document.getElementById("letter-salutation-name").textContent = reviewerData.fullName;
+        document.getElementById("letter-recipient-degree").textContent = reviewerData.educationLevel;
+        document.getElementById("letter-recipient-affiliation").textContent = reviewerData.affiliation;
+
+        // Update Current Date in letter
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("letter-current-date").textContent = 
+          `C.d. Universitaria; San Nicolás de los Garza, N.L., a ${today.toLocaleDateString('es-MX', options)}.`;
+
+        // Update Review Banner
+        document.getElementById("banner-reviewer-name").textContent = reviewerData.fullName;
+        document.getElementById("banner-reviewer-orcid").textContent = reviewerData.orcid;
+
         goToSlide(2);
       });
 
-      document.getElementById("btn-reject-invitation").addEventListener("click", () => {
-        showModalConfirm("Decline Invitation", "Are you sure you want to decline this invitation? You will exit the system.", "Yes, decline", "Cancel", () => {
-          goToSlide(5);
-          document.getElementById("state-submitting").classList.add("hidden");
-          document.getElementById("state-rejected").classList.remove("hidden");
-          updateStatusBadge("Declined", "bg-rose-500/10 text-rose-500 border-rose-500/20");
-        });
+      // Step 2: Letter Navigation
+      document.getElementById("btn-back-to-step1").addEventListener("click", () => {
+        goToSlide(1);
+        updateSystemStatusBadge("Started");
       });
 
+      // Step 2: Accept and Proceed to Instructions
       document.getElementById("btn-to-step-3").addEventListener("click", () => {
-        // Enviar evento de "Aceptado" al backend sin interrumpir al usuario
-        fetch(WEB_APP_URL, {
-          method: "POST", mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "invitation_accepted", evaluatorName: reviewerData.fullName, evaluatorEmail: reviewerData.email, evaluatorID: reviewerData.orcid, evaluatorDegree: reviewerData.educationLevel, evaluatorAffiliation: reviewerData.affiliation })
+        updateSystemStatusBadge("Accepted");
+        
+        // Notify backend that reviewer accepted the invitation
+        sendAcceptanceNotification();
+
+        setTimeout(() => {
+          goToSlide(3);
+          updateSystemStatusBadge("In Progress");
+        }, 350);
+      });
+      
+      // Step 2: Reject Action (Using Custom In-Page Modal)
+      document.getElementById("btn-reject-invitation").addEventListener("click", () => {
+        showCustomConfirm({
+          type: "danger",
+          title: "Decline Invitation?",
+          message: "Are you sure you wish to decline the invitation to evaluate this doctoral research instrument?",
+          confirmText: "Yes, Decline Invitation",
+          cancelText: "Cancel",
+          onConfirm: () => {
+            updateSystemStatusBadge("Declined");
+            goToSlide(5);
+            document.getElementById("state-submitting").classList.add("hidden");
+            document.getElementById("state-success").classList.add("hidden");
+            document.getElementById("state-rejected").classList.remove("hidden");
+            sendDeclineNotification();
+          }
         });
-        updateStatusBadge("Accepted & In Progress", "bg-blue-500/10 text-blue-400 border-blue-500/20");
-        goToSlide(3);
       });
 
-      document.getElementById("btn-to-step-4").addEventListener("click", () => goToSlide(4));
+      // Step 2: Download Letter as PDF using html2pdf
+      document.getElementById("btn-download-pdf").addEventListener("click", () => {
+        const element = document.getElementById("letter-pdf-container");
+        const safeName = reviewerData.fullName.replace(/\s+/g, '_') || "Evaluador";
+        const opt = {
+          margin:       [10, 10, 10, 10],
+          filename:     `Carta_Invitacion_CVI_${safeName}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true },
+          jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+      });
+
+      // Step 3: Instructions Navigation
+      document.getElementById("btn-back-to-step2").addEventListener("click", () => {
+        goToSlide(2);
+        updateSystemStatusBadge("Accepted");
+      });
+      document.getElementById("btn-to-step-4").addEventListener("click", () => {
+        goToSlide(4);
+        updateSystemStatusBadge("In Progress");
+      });
+
+      // Step 4: Items Navigation & Submission
+      document.getElementById("btn-back-to-step3").addEventListener("click", () => goToSlide(3));
       document.getElementById("btn-submit-evaluation").addEventListener("click", handleSubmitEvaluation);
+    }
+
+    // Modal Helpers (Zero native alert/confirm popups)
+    function showCustomAlert(title, message, iconType = "warning") {
+      const backdrop = document.getElementById("custom-modal-backdrop");
+      const iconContainer = document.getElementById("modal-icon-container");
+      const titleElem = document.getElementById("modal-title");
+      const messageElem = document.getElementById("modal-message");
+      const actionsContainer = document.getElementById("modal-actions");
+
+      if (!backdrop || !titleElem || !messageElem || !actionsContainer) {
+        return;
+      }
+
+      titleElem.textContent = title;
+      messageElem.textContent = message;
+
+      if (iconType === "warning") {
+        iconContainer.className = "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-amber-100 text-amber-600";
+        iconContainer.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+      } else {
+        iconContainer.className = "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-blue-100 text-blue-600";
+        iconContainer.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+      }
+
+      actionsContainer.innerHTML = `
+        <button type="button" id="modal-btn-ok" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition">
+          OK, Got It
+        </button>
+      `;
+
+      backdrop.classList.remove("hidden");
+      const okBtn = document.getElementById("modal-btn-ok");
+      if (okBtn) {
+        okBtn.onclick = () => backdrop.classList.add("hidden");
+      }
+    }
+
+    function showCustomConfirm({ title, message, onConfirm, confirmText = "Confirm", cancelText = "Cancel", type = "warning" }) {
+      const backdrop = document.getElementById("custom-modal-backdrop");
+      const iconContainer = document.getElementById("modal-icon-container");
+      const titleElem = document.getElementById("modal-title");
+      const messageElem = document.getElementById("modal-message");
+      const actionsContainer = document.getElementById("modal-actions");
+
+      if (!backdrop || !titleElem || !messageElem || !actionsContainer) {
+        if (typeof onConfirm === "function") onConfirm();
+        return;
+      }
+
+      titleElem.textContent = title;
+      messageElem.textContent = message;
+
+      if (type === "danger") {
+        iconContainer.className = "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-rose-100 text-rose-600";
+        iconContainer.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+      } else {
+        iconContainer.className = "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-amber-100 text-amber-600";
+        iconContainer.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+      }
+
+      const confirmBtnClass = type === "danger" 
+        ? "bg-rose-600 hover:bg-rose-700 text-white" 
+        : "bg-blue-600 hover:bg-blue-700 text-white";
+
+      actionsContainer.innerHTML = `
+        <button type="button" id="modal-btn-cancel" class="text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white border border-slate-300 hover:bg-slate-50 px-4 py-2.5 rounded-xl transition">
+          ${cancelText}
+        </button>
+        <button type="button" id="modal-btn-confirm" class="${confirmBtnClass} text-xs font-semibold px-5 py-2.5 rounded-xl transition shadow-xs">
+          ${confirmText}
+        </button>
+      `;
+
+      backdrop.classList.remove("hidden");
+
+      const cancelBtn = document.getElementById("modal-btn-cancel");
+      const confirmBtn = document.getElementById("modal-btn-confirm");
+
+      if (cancelBtn) {
+        cancelBtn.onclick = () => backdrop.classList.add("hidden");
+      }
+      if (confirmBtn) {
+        confirmBtn.onclick = () => {
+          backdrop.classList.add("hidden");
+          if (typeof onConfirm === "function") onConfirm();
+        };
+      }
+    }
+
+    // Sends an email notification to research team that reviewer accepted the letter
+    async function sendAcceptanceNotification() {
+      const payload = {
+        action: "invitation_accepted",
+        evaluatorName: reviewerData.fullName,
+        evaluatorDegree: reviewerData.educationLevel,
+        evaluatorAffiliation: reviewerData.affiliation,
+        evaluatorID: reviewerData.orcid,
+        evaluatorEmail: reviewerData.email,
+        progressPercent: "50%",
+        statusText: "Accepted & Proceeding to Review"
+      };
+
+      try {
+        await fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn("Could not dispatch acceptance alert:", err);
+      }
+    }
+
+    // Optional notification when an reviewer declines
+    async function sendDeclineNotification() {
+      const payload = {
+        action: "invitation_declined",
+        evaluatorName: reviewerData.fullName,
+        evaluatorDegree: reviewerData.educationLevel,
+        evaluatorAffiliation: reviewerData.affiliation,
+        evaluatorID: reviewerData.orcid,
+        evaluatorEmail: reviewerData.email,
+        progressPercent: "Declined",
+        statusText: "Declined"
+      };
+
+      try {
+        await fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn("Could not dispatch decline alert:", err);
+      }
     }
 
     function buildItemsTable() {
       const container = document.getElementById("evaluation-cards-container");
+      container.innerHTML = "";
+
       INSTRUMENT_ITEMS.forEach((item, index) => {
-        container.innerHTML += `
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-4">
-            <p class="font-bold mb-3">${item.id}: ${item.question}</p>
-            <div class="grid grid-cols-3 gap-4 mb-3">
-              <select id="rel-${index}" class="p-2 rounded border text-sm"><option value="">Relevance...</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>
-              <select id="cla-${index}" class="p-2 rounded border text-sm"><option value="">Clarity...</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>
-              <select id="suf-${index}" class="p-2 rounded border text-sm"><option value="">Sufficiency...</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>
+        const card = document.createElement("div");
+        card.className = "bg-slate-50 border border-slate-200 rounded-xl p-5 md:p-6 transition hover:border-slate-300";
+
+        card.innerHTML = `
+          <!-- Meta Header -->
+          <div class="flex flex-wrap justify-between items-center gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="bg-slate-900 text-white font-bold text-xs px-2.5 py-1 rounded-md">${item.id}</span>
+              <span class="text-xs font-semibold text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded-md">
+                ${item.aspect}
+              </span>
             </div>
-            <input type="text" id="obs-${index}" placeholder="Comments (N/A if not applicable)" value="N/A" class="w-full p-2 border rounded text-sm">
-          </div>`;
+            <div class="flex items-center gap-2 text-xs">
+              <span class="bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-medium">Type: ${item.type}</span>
+              <span class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded font-medium">Priority: ${item.priority}</span>
+            </div>
+          </div>
+
+          <!-- Question Content -->
+          <p class="text-slate-900 font-semibold text-sm md:text-base leading-relaxed mb-5">
+            "${item.question}"
+          </p>
+
+          <!-- 3 Quantitative Scores Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="rel-${index}">
+                Relevance (1-4) <span class="text-red-500">*</span>
+              </label>
+              <select id="rel-${index}" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="">Select (1-4)...</option>
+                <option value="4">4 - Highly Relevant</option>
+                <option value="3">3 - Relevant (Minor Revision)</option>
+                <option value="2">2 - Needs Major Revision</option>
+                <option value="1">1 - Not Relevant</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="cla-${index}">
+                Clarity (1-4) <span class="text-red-500">*</span>
+              </label>
+              <select id="cla-${index}" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="">Select (1-4)...</option>
+                <option value="4">4 - Highly Clear</option>
+                <option value="3">3 - Clear (Minor Revision)</option>
+                <option value="2">2 - Needs Major Revision</option>
+                <option value="1">1 - Not Clear</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="suf-${index}">
+                Sufficiency (1-4) <span class="text-red-500">*</span>
+              </label>
+              <select id="suf-${index}" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="">Select (1-4)...</option>
+                <option value="4">4 - Highly Sufficient</option>
+                <option value="3">3 - Sufficient (Minor Revision)</option>
+                <option value="2">2 - Needs Major Revision</option>
+                <option value="1">1 - Insufficient</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Qualitative Feedback Input -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="obs-${index}">
+              Qualitative Comments and Suggestions
+            </label>
+            <input type="text" id="obs-${index}" placeholder="Add comments if necessary (or leave N/A)" value="N/A"
+                   class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white text-sm outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+        `;
+
+        container.appendChild(card);
       });
     }
 
-    function updateStatusBadge(text, colorClasses) {
-      const b = document.getElementById("system-status-badge");
-      b.className = `inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${colorClasses}`;
-      b.innerHTML = text;
-    }
+    function goToSlide(stepNumber) {
+      document.getElementById("slide-step-1").classList.add("hidden");
+      document.getElementById("slide-step-2").classList.add("hidden");
+      document.getElementById("slide-step-3").classList.add("hidden");
+      document.getElementById("slide-step-4").classList.add("hidden");
+      document.getElementById("slide-step-5").classList.add("hidden");
 
-    function goToSlide(step) {
-      for(let i=1; i<=5; i++) document.getElementById(`slide-step-${i}`).classList.add("hidden");
-      document.getElementById(`slide-step-${step}`).classList.remove("hidden");
-      window.scrollTo(0,0);
+      const progressBar = document.getElementById("progress-bar");
+      const stepText = document.getElementById("progress-step-text");
+      const percentText = document.getElementById("progress-percentage-text");
+
+      if (stepNumber === 1) {
+        document.getElementById("slide-step-1").classList.remove("hidden");
+        progressBar.style.width = "25%";
+        stepText.textContent = "Step 1 of 4: Welcome & Reviewer Registration";
+        percentText.textContent = "25%";
+      } else if (stepNumber === 2) {
+        document.getElementById("slide-step-2").classList.remove("hidden");
+        progressBar.style.width = "50%";
+        stepText.textContent = "Step 2 of 4: Formal Invitation Letter";
+        percentText.textContent = "50%";
+      } else if (stepNumber === 3) {
+        document.getElementById("slide-step-3").classList.remove("hidden");
+        progressBar.style.width = "75%";
+        stepText.textContent = "Step 3 of 4: Instructions & Rating Rubric";
+        percentText.textContent = "75%";
+      } else if (stepNumber === 4) {
+        document.getElementById("slide-step-4").classList.remove("hidden");
+        progressBar.style.width = "90%";
+        stepText.textContent = "Step 4 of 4: Semi-Structured Interview Evaluation";
+        percentText.textContent = "90%";
+      } else if (stepNumber === 5) {
+        document.getElementById("slide-step-5").classList.remove("hidden");
+        progressBar.style.width = "100%";
+        stepText.textContent = "Evaluation Process Complete";
+        percentText.textContent = "100%";
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     async function handleSubmitEvaluation() {
-      const evals = [];
-      let missingField = false, missingComment = false;
+      const evaluations = [];
+      let missingField = false;
+      let missingComment = false;
 
-      INSTRUMENT_ITEMS.forEach((item, i) => {
-        const r = document.getElementById(`rel-${i}`).value, c = document.getElementById(`cla-${i}`).value, s = document.getElementById(`suf-${i}`).value, o = document.getElementById(`obs-${i}`).value.trim();
-        if(!r || !c || !s) missingField = true;
-        if((r<=2 || c<=2 || s<=2) && (o.toLowerCase()==='n/a' || !o)) missingComment = true;
-        evals.push({ itemId: item.id, scale: item.aspect, question: item.question, relevance: parseInt(r), clarity: parseInt(c), sufficiency: parseInt(s), observations: o || "N/A" });
+      INSTRUMENT_ITEMS.forEach((item, index) => {
+        const relElem = document.getElementById(`rel-${index}`);
+        const claElem = document.getElementById(`cla-${index}`);
+        const sufElem = document.getElementById(`suf-${index}`);
+        const obsElem = document.getElementById(`obs-${index}`);
+
+        const rel = relElem ? relElem.value : "";
+        const cla = claElem ? claElem.value : "";
+        const suf = sufElem ? sufElem.value : "";
+        let obs = obsElem ? obsElem.value.trim() : "N/A";
+
+        if (!rel || !cla || !suf) {
+          missingField = true;
+        }
+
+        const numRel = parseInt(rel, 10);
+        const numCla = parseInt(cla, 10);
+        const numSuf = parseInt(suf, 10);
+
+        // Quality recommendation: if rated 1 or 2, verify if meaningful observation exists
+        if ((numRel <= 2 || numCla <= 2 || numSuf <= 2) && (!obs || obs.toLowerCase() === "n/a" || obs.toLowerCase() === "na")) {
+          missingComment = true;
+        }
+
+        evaluations.push({
+          itemId: item.id,
+          scale: item.aspect,
+          question: item.question,
+          type: item.type,
+          priority: item.priority,
+          relevance: numRel,
+          clarity: numCla,
+          sufficiency: numSuf,
+          observations: obs || "N/A"
+        });
       });
 
-      if (missingField) return showModalAlert("Incomplete Evaluation", "Please assign a score (1-4) for Relevance, Clarity, and Sufficiency on all 9 items.", "error");
+      if (missingField) {
+        showCustomAlert(
+          "Incomplete Ratings",
+          "Please make sure to select Relevance, Clarity, and Sufficiency scores (1–4) for all 9 items before submitting."
+        );
+        return;
+      }
 
-      const processSubmission = async () => {
+      const proceedExecution = () => {
+        // Display loading slide
         goToSlide(5);
         document.getElementById("state-submitting").classList.remove("hidden");
         document.getElementById("state-success").classList.add("hidden");
-        updateStatusBadge("Submitting...", "bg-amber-500/10 text-amber-500 border-amber-500/20");
-        try {
-          await fetch(WEB_APP_URL, {
-            method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ action: "final_submission", evaluatorName: reviewerData.fullName, evaluatorEmail: reviewerData.email, evaluatorID: reviewerData.orcid, evaluations: evals })
+        document.getElementById("state-rejected").classList.add("hidden");
+
+        const payload = {
+          action: "final_submission",
+          evaluatorName: reviewerData.fullName,
+          evaluatorDegree: reviewerData.educationLevel,
+          evaluatorAffiliation: reviewerData.affiliation,
+          evaluatorID: reviewerData.orcid,
+          evaluatorEmail: reviewerData.email,
+          evaluatorBiodata: reviewerData.biodata,
+          evaluations: evaluations
+        };
+
+        // Timeout handler to ensure smooth UI transition
+        const sendPromise = fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const timeoutPromise = new Promise(resolve => setTimeout(resolve, 5500));
+
+        Promise.race([sendPromise, timeoutPromise])
+          .then(() => {
+            updateSystemStatusBadge("Finished");
+            document.getElementById("state-submitting").classList.add("hidden");
+            document.getElementById("state-success").classList.remove("hidden");
+          })
+          .catch((err) => {
+            console.warn("Notice during submission dispatch:", err);
+            updateSystemStatusBadge("Finished");
+            document.getElementById("state-submitting").classList.add("hidden");
+            document.getElementById("state-success").classList.remove("hidden");
           });
-          document.getElementById("state-submitting").classList.add("hidden");
-          document.getElementById("state-success").classList.remove("hidden");
-          updateStatusBadge("Finished", "bg-emerald-500/10 text-emerald-500 border-emerald-500/20");
-        } catch(e) { showModalAlert("Error", "Submission failed. Please try again.", "error"); goToSlide(4); }
       };
 
-      if (missingComment) showModalConfirm("Missing Feedback", "You gave a score of 1 or 2 without comments. We recommend adding feedback. Submit anyway?", "Submit", "Go back", processSubmission);
-      else processSubmission();
-    }
+      if (missingComment) {
+        showCustomConfirm({
+          type: "warning",
+          title: "Qualitative Feedback Recommended",
+          message: "One or more items received a score of 1 or 2 with observation as 'N/A'. Constructive qualitative recommendations are strongly encouraged to guide item improvement.\n\nWould you like to proceed with the submission anyway?",
+          confirmText: "Submit Anyway",
+          cancelText: "Go Back & Add Comments",
+          onConfirm: proceedExecution
+        });
+        return;
+      }
 
-    // Modal Helpers
-    function showModalAlert(title, msg, type) {
-      document.getElementById("modal-title").innerText = title; document.getElementById("modal-message").innerText = msg;
-      document.getElementById("modal-actions").innerHTML = `<button onclick="closeModal()" class="bg-slate-800 text-white px-6 py-2 rounded-lg font-bold w-full">OK</button>`;
-      document.getElementById("modal-icon-container").className = `w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${type==='error'?'bg-rose-100 text-rose-600':'bg-blue-100 text-blue-600'}`;
-      document.getElementById("custom-modal-backdrop").classList.remove("hidden"); setTimeout(() => document.getElementById("custom-modal-backdrop").classList.remove("opacity-0"), 10);
-    }
-    function showModalConfirm(title, msg, btnConfirm, btnCancel, onConfirm) {
-      document.getElementById("modal-title").innerText = title; document.getElementById("modal-message").innerText = msg;
-      document.getElementById("modal-icon-container").className = "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-amber-100 text-amber-600";
-      document.getElementById("modal-actions").innerHTML = `
-        <button id="modal-btn-cancel" class="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-lg font-bold w-full sm:w-auto">Cancel</button>
-        <button id="modal-btn-confirm" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold w-full sm:w-auto">${btnConfirm}</button>`;
-      document.getElementById("custom-modal-backdrop").classList.remove("hidden"); setTimeout(() => document.getElementById("custom-modal-backdrop").classList.remove("opacity-0"), 10);
-      document.getElementById("modal-btn-cancel").onclick = closeModal;
-      document.getElementById("modal-btn-confirm").onclick = () => { closeModal(); onConfirm(); };
-    }
-    function closeModal() {
-      document.getElementById("custom-modal-backdrop").classList.add("opacity-0");
-      setTimeout(() => document.getElementById("custom-modal-backdrop").classList.add("hidden"), 300);
+      proceedExecution();
     }
   </script>
 </body>
