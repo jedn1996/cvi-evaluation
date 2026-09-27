@@ -847,6 +847,7 @@
         evaluatorAffiliation: reviewerData.affiliation,
         evaluatorID: reviewerData.orcid,
         evaluatorEmail: reviewerData.email,
+        evaluatorBiodata: document.getElementById('short-biodata') ? document.getElementById('short-biodata').value : '',
         progressPercent: "50%",
         statusText: "Accepted & Proceeding to Review"
       };
@@ -1077,6 +1078,7 @@
           evaluatorAffiliation: reviewerData.affiliation,
           evaluatorID: reviewerData.orcid,
           evaluatorEmail: reviewerData.email,
+          evaluatorBiodata: reviewerData.bio || reviewerData.biodata || document.getElementById('short-biodata')?.value || '',
           evaluatorBiodata: reviewerData.biodata,
           evaluations: evaluations
         };
